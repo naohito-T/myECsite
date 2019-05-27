@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<!-- Strutsの詳細設定。 -->
+<struts>
+<!-- devModeをtrueにすると開発モードになる。trueの状態は脆弱性がある。 -->
+	<constant name="struts.devMode" value="true"/>
+	<package name="com.internousdev.ecsite.action" extends="struts-default">
+
+			<!-- ⇓呼び出されるJavaクラスファイルと実行するメソッドを登録します。 -->
+		<action name="GoHomeAction" class="com.internousdev.ecsite.action.GoHomeAction" method="execute">
+			<!-- ⇓実行された場合resultメソッドにより次のページへ遷移する。 -->
+			<result name="success">home.jsp</result>
+
+		</action>
+			<!-- Home画面→loginを押すと商品を購入する場合ログインをお願いしますの画面へ遷移する。 -->
+		<action name="HomeAction" class="com.internousdev.ecsite.action.HomeAction" method="execute">
+			<result name="login">login.jsp</result>
+			<result name="success">buyItem.jsp</result>
+		</action>
+			<!-- Home画面→新規Login済みでLoginを押すとログインできた場合。 -->
+		<action name="LoginAction" class="com.internousdev.ecsite.action.LoginAction" method="execute">
+			<!-- 買い物画面へ遷移 -->
+			<result name="success">buyItem.jsp</result>
+			<!-- もう一度ログインしてください。 -->
+		<result name="error">login.jsp</result>
+		<result name="login">admin.jsp</result>
+		</action>
+
+			<!-- Home画面の新規ユーザー登録はこちらからを押すとUserCreateActionが作動。 -->
+		<action name="UserCreateAction" class="com.internousdev.ecsite.action.UserCreateAction" method="execute">
+			<!-- HomeActionのボタンからくる→新規ユーザーの入力画面。登録ボタンを押しこの内容でよろしいですかの画面("UserCreateConfirmAction" )へ遷移。 -->
+			<result name="success">userCreate.jsp</result>
+			<!-- 空欄があるともう一度と画面になる。 -->
+			<result name="back">login.jsp</result>
+		</action>
+
+			<!-- UserCreateから入力値が来る。この内容でよろしいですかでユーザーより了承があればdbへ接続し登録完了致しましたの画面になる。 -->
+		<action name="UserCreateConfirmAction" class="com.internousdev.ecsite.action.UserCreateConfirmAction" method="execute">
+			<!-- UserActionから遷移しこの内容でよろしいですかの画面に遷移。 -->
+			<result name="success">userCreateConfirm.jsp</result>
+			<!-- successになりユーザーから登録ボタンを押されると"UserCreateCompleteAction"が作動。 -->
+			<result name="error">userCreate.jsp</result>
+		</action>
+
+			<!-- 登録完了致しました。の画面になる。 -->
+		<action name="UserCreateCompleteAction" class="com.internousdev.ecsite.action.UserCreateCompleteAction" method="execute">
+			<result name="success">userCreateComplete.jsp</result>
+		</action>
+
+			<!-- "HomeAction"の購入ボタンから押し"BuyItemAction"が作動。 -->
+		<action name="BuyItemAction" class="com.internousdev.ecsite.action.BuyItemAction" method="execute">
+			<!-- "BuyItemAction"がsuccessになればこの購入内容でよろしいですかになる。 -->
+			<result name="success">buyItemConfirm.jsp</result>
+		</action>
+
+			<!-- "buyItemConfirm.jsp"の購入ボタンから作動し"BuyItemConfirmAction"がstrutsのおかげで動く。 -->
+		<action name="BuyItemConfirmAction" class="com.internousdev.ecsite.action.BuyItemConfirmAction" method="execute">
+			<result name="success">buyItemComplete.jsp</result>
+			<result name="back">buyItem.jsp</result>
+		</action>
+
+		<action name="MyPageAction" class="com.internousdev.ecsite.action.MyPageAction" method="execute">
+			<result name="success">myPage.jsp</result>
+		</action>
+
+		<action name="LogoutAction" class="com.internousdev.ecsite.action.LogoutAction" method="execute">
+			<result name="success">home.jsp</result>
+		</action>
+
+
+		<action name="AdminAction" class="com.internousdev.ecsite.action.AdminAction" method="execute">
+			<result name="success">admin.jsp</result>
+		</action>
+
+		<action name="ItemCreateAction" class="com.internousdev.ecsite.action.ItemCreateAction" method="execute">
+			<result name="success">itemCreate.jsp</result>
+		</action>
+
+		<action name="ItemCreateConfirmAction" class="com.internousdev.ecsite.action.ItemCreateConfirmAction" method="execute">
+			<result name="success">itemCreateConfirm.jsp</result>
+			<!-- ↓エラーメッセージを表示するため戻る setErrorMessageの内容が入る。 -->
+			<result name="error">itemCreate.jsp</result>
+		</action>
+
+		<action name="ItemCreateCompleteAction" class="com.internousdev.ecsite.action.ItemCreateCompleteAction" method="execute">
+			<result name="success">itemCreateComplete.jsp</result>
+		</action>
+
+		<action name="ItemListAction" class="com.internousdev.ecsite.action.ItemListAction" method="execute">
+			<result name="success">itemList.jsp</result>
+		</action>
+
+		<action name="UserListAction" class="com.internousdev.ecsite.action.UserListAction" method="execute">
+			<result name="success">userList.jsp</result>
+		</action>
+
+		<action name="ItemListDeleteConfirmAction" class="com.internousdev.ecsite.action.ItemListDeleteConfirmAction" method="execute">
+			<result name="success">itemListDeleteConfirm.jsp</result>
+		</action>
+
+		<action name="ItemListDeleteCompleteAction" class="com.internousdev.ecsite.action.ItemListDeleteCompleteAction" method="execute">
+			<result name="success">itemListDeleteComplete.jsp</result>
+		</action>
+
+		<action name="UserListDeleteConfirmAction" class="com.internousdev.ecsite.action.UserListDeleteConfirmAction" method="execute">
+			<result name="success">userListDeleteConfirm.jsp</result>
+		</action>
+
+		<action name="UserListDeleteCompleteAction" class="com.internousdev.ecsite.action.UserListDeleteCompleteAction" method="execute">
+			<result name="success">userListDeleteComplete.jsp</result>
+		</action>
+	</package>
+</struts>

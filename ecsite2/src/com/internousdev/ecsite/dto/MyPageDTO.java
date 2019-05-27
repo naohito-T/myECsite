@@ -1,0 +1,60 @@
+package com.internousdev.ecsite.dto;
+
+
+
+public class MyPageDTO {
+
+//	テーブルカラムに対応したフィールド変数を宣言します。
+	public String itemName;    //フィールドと呼ばれているが、オブジェクトを作成することによって、
+	public String totalPrice;  //それぞれのオブジェクトが値を代入したり出力することができる。
+	public String totalCount;  //各オブジェクトごとにフィールドの値を格納する事ができる。
+	public String payment;     //この事をオブジェクトに関連付けられるということで、
+	public String userName;    //インスタンス変数。インスタンスメソッドと呼ぶ。
+	public String id;
+	public String insert_date;
+
+//	フィールド変数に対応したget/setメソッドを定義します。
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public String getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(String totalCount) {
+		this.totalCount = totalCount;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getInsert_date() {
+		return insert_date;
+	}
+	public void setInsert_date(String insert_date) {
+		this.insert_date = insert_date;
+	}
+
+}
